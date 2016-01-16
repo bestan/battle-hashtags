@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    'battle'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -122,3 +124,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BROKER_URL = 'amqp://guest:@broker/'
+
+import djcelery
+djcelery.setup_loader()
+
+TWITTER_CONSUMER_KEY = '7UqISZkIEq6hIMhUFjsArLuYk'
+TWITTER_CONSUMER_SECRET = 'QvA66cakgXeHGK9o0jLY2ErbKcueai8twi4WkPMCODDIB1KeIf'
+TWITTER_ACCESS_TOKEN = '745262287-mPExYZpjRzE4TmoTb8vc5s9p5syaApQfEIMvTmh7'
+TWITTER_ACCESS_TOKEN_SECRET = 'HSMWgccqE1pY384p5uvNbqiy5ReINTYFWyR4BePwN147n'

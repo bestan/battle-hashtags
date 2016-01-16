@@ -1,11 +1,24 @@
 db:
   image: postgres
+  ports:
+    - "5432:5432"
+broker:
+  image: rabbitmq
 web:
   build: .
-  command: python manage.py runserver 0.0.0.0:8000
+  command: bash run.sh
   volumes:
     - .:/code
   ports:
     - "8000:8000"
   links:
     - db
+    - broker
+worker:
+  build: .
+  command: su -m worker -c "python manage.py celery worker --loglevel=info"
+  volumes:
+    - .:/app
+  links:
+    - db
+    - broker

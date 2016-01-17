@@ -35,7 +35,7 @@ class Battle(models.Model):
     task_id = models.CharField(null=True, max_length=100)
 
     def __str__(self):
-        return "Battle '%s' (id: %d)" % (self.name, self.id)
+        return "%s (id: %d)" % (self.name, self.id)
 
 signals.post_save.connect(schedule_battle, sender=Battle)
 

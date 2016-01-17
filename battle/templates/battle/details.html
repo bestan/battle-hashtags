@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Details</title>
+</head>
+<body>
+  <h2>{{ battle }}</h2>
+  <p>Start time: {{ battle.start_time }}</p>
+  <p>End time: {{ battle.end_time }}</p>
+
+  {% if battle_hashtags %}
+
+    <p>Current winner: {{ winning_hashtag }}</p>
+    <h4>All hashtags: </h4>
+
+    {% for battle_hashtag in battle_hashtags %}
+      {{ battle_hashtag.hashtag.value }} has {{ battle_hashtag.typos }} typos
+    {% endfor %}
+
+  {% else %}
+
+    This battle has no hashtags
+
+  {% endif %}
+
+  <p><a href="{% url 'admin:battle_battle_change' battle.id %}">Edit battle</a></p>
+</body>
+</html>

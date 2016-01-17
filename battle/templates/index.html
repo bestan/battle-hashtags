@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The battle of hashtags</title>
+</head>
+<body>
+
+  <h1>The battle of hashtags</h1>
+
+  {% if battles %}
+    <h3>List of existing battles:</h3>
+
+    {% for battle in battles %}
+      <h4><a href="{% url 'detail' battle.id%}">{{ battle }}</a></h4>
+    {% endfor %}
+
+  {% else %}
+
+    <h4>There are no battles at the moment. <a href="{% url 'admin:battle_battle_add' %}">Create some</a></h4>
+
+  {% endif %}
+
+</body>
+</html>

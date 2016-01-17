@@ -53,6 +53,8 @@ def stream_twitter(battle_id):
 
     battle.battlehashtags_set.update(typos=0)
     battle_hashtags = battle.battlehashtags_set.all().prefetch_related('hashtag')
+    if battle_hashtags.count() == 0:
+        return
 
     hashtag_values = [x.hashtag.value for x in battle_hashtags]
 

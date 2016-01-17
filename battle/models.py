@@ -41,9 +41,34 @@ class Battle(models.Model):
     def __str__(self):
         return "%s (id: %d)" % (self.name, self.id)
 
+    def get_winner(self):
+        battle_hashtags = self.battlehashtags_set.all()
+        return battle_hashtags.filter(words__gt=0).order_by('typos').first()
+
+    def get_winner_by_ratio(self):
+        winner_by_ratio = None
+        winning_ratio = 1
+
+        battle_hashtags = self.battlehashtags_set.all()
+        for battle_hashtag in battle_hashtags:
+            if battle_hashtag.words:
+                ratio = float(battle_hashtag.typos) / battle_hashtag.words
+                if ratio < winning_ratio:
+                    winner_by_ratio = battle_hashtag
+                    winning_ratio = ratio
+        return winner_by_ratio
+
 signals.post_save.connect(schedule_battle, sender=Battle)
 
 class BattleHashtags(models.Model):
     hashtag = models.ForeignKey(Hashtag)
     battle = models.ForeignKey(Battle)
     typos = models.IntegerField(default=0)
+    words = models.IntegerField(default=0)
+
+    def to_dict(self):
+        data = dict()
+        data['typos'] = self.typos
+        data['words'] = self.words
+        data['hashtag'] = self.hashtag.to_dict()
+        return data

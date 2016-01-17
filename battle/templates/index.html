@@ -16,9 +16,11 @@
 
   {% else %}
 
-    <h4>There are no battles at the moment. <a href="{% url 'admin:battle_battle_add' %}">Create some</a></h4>
+    <h4>There are no battles at the moment.</h4>
 
   {% endif %}
+
+  <p><a href="{% url 'admin:battle_battle_add' %}">Create battle</a></p>
 
 </body>
 </html>

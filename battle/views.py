@@ -15,7 +15,14 @@ def detail(request, battle_id):
         raise Http404('Battle does not exist')
 
     battle_hashtags = battle.battlehashtags_set.all().prefetch_related('hashtag')
+
     data = dict(battle=battle, battle_hashtags=battle_hashtags)
+
+    winner = battle.get_winner()
+    data['winner'] = winner.hashtag.value if winner else None
+
+    winner_by_ratio = battle.get_winner_by_ratio()
+    data['winner_by_ratio'] = winner_by_ratio.hashtag.value if winner_by_ratio else None
 
     return render(request, 'battle/details.html', data)
 
@@ -26,13 +33,18 @@ def api_detail(request, battle_id):
         raise Http404('Battle does not exist')
 
     battle_hashtags = battle.battlehashtags_set.all().prefetch_related('hashtag')
-    winner = battle_hashtags.order_by('typos').first()
 
     data = dict()
     data['name'] = battle.name
     data['start_time'] = battle.start_time
     data['end_time'] = battle.end_time
-    data['winner'] = dict(typos=winner.typos, hashtag=winner.hashtag.to_dict())
+    
+    winner = battle.get_winner()
+    data['winner'] = winner.hashtag.value if winner else None
+
+    winner_by_ratio = battle.get_winner_by_ratio()
+    data['winner_by_ratio'] = winner_by_ratio.hashtag.value if winner_by_ratio else None
+
     data['hashtags'] = [x.hashtag.to_dict() for x in battle_hashtags]
 
     return JsonResponse(data)

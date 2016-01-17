@@ -25,6 +25,7 @@ class TwitterStreamListener(StreamListener):
             print 'value', battle_hashtag.hashtag.value.lower()
             print 'tweet', data['text'].lower()
             print battle_hashtag.hashtag.value.lower() in data['text'].lower()
+
             if battle_hashtag.hashtag.value.lower() in data['text'].lower():
                 checker = SpellChecker('en_GB')
                 checker.set_text(data['text'])
@@ -32,6 +33,7 @@ class TwitterStreamListener(StreamListener):
                     print 'typo', typo.word
                     battle_hashtag.typos+=1
 
+                battle_hashtag.words += len(data['text'].split(' '))
                 battle_hashtag.save()
 
         return True
@@ -51,7 +53,7 @@ def stream_twitter(battle_id):
     if battle.end_time < timezone.now():
         return
 
-    battle.battlehashtags_set.update(typos=0)
+    battle.battlehashtags_set.update(typos=0, words=0)
     battle_hashtags = battle.battlehashtags_set.all().prefetch_related('hashtag')
     if battle_hashtags.count() == 0:
         return

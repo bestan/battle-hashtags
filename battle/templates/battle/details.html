@@ -10,11 +10,12 @@
 
   {% if battle_hashtags %}
 
-    <p>Current winner: {{ winning_hashtag }}</p>
+    <p>Current winner (per specification): {{ winner }}</p>
+    <p>Winner by typos/words ratio: {{ winner_by_ratio }}</p>
     <h4>All hashtags: </h4>
 
     {% for battle_hashtag in battle_hashtags %}
-      {{ battle_hashtag.hashtag.value }} has {{ battle_hashtag.typos }} typos
+      <p>{{ battle_hashtag.hashtag.value }} has {{ battle_hashtag.words }} words and {{ battle_hashtag.typos }} typos</p>
     {% endfor %}
 
   {% else %}

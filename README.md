@@ -43,9 +43,9 @@ Hashtags that have more tweets are likely to have more typos, which is why I've 
 JSON endpoint and the frontend shows both winners (according to the specificaion + by ratio).
 
 ###Notes
-- Editing a battle will terminate any tasks running the battle (if any), and it will also re-schedule it.
+- Editing a battle will terminate any tasks running for that battle (if any) and it will schedule a new task.
 - Twitter error code 420 means that Twitter has rate-limitted the app. In this case, please try again in 10 minutes.
-- Hashtags with 0 tweets can't be a winner (which is why Current winner might say `null`).
+- Hashtags with 0 tweets can't win (which is why current winner might say `null`).
 
 ###Future improvements
  - Implement tests.

@@ -6,8 +6,8 @@
 - Celery with RabbitMQ as a broker
 
 ###Requirements
-- Docker (developed with 1.8.3)
-- Docker compose (developed with 1.4.2)
+- Docker (developed with 1.9.1)
+- Docker compose (developed with 1.5.2)
   
 ###Admin credentials
 - username: admin
@@ -15,9 +15,9 @@
 - url: /admin
 
 ###Installation
-First, run the container:
+First, run the containers:
 ```
-docker-compose build && docker-compose up
+docker-compose up
 ```
 
 Then find IP of your docker machine

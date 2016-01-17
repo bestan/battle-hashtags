@@ -20,17 +20,11 @@ class TwitterStreamListener(StreamListener):
 
     def on_data(self, text):
         data = json.loads(text)
-        print data
         for battle_hashtag in self.battle_hashtags:
-            print 'value', battle_hashtag.hashtag.value.lower()
-            print 'tweet', data['text'].lower()
-            print battle_hashtag.hashtag.value.lower() in data['text'].lower()
-
             if battle_hashtag.hashtag.value.lower() in data['text'].lower():
                 checker = SpellChecker('en_GB')
                 checker.set_text(data['text'])
                 for typo in checker:
-                    print 'typo', typo.word
                     battle_hashtag.typos+=1
 
                 battle_hashtag.words += len(data['text'].split(' '))
@@ -74,7 +68,6 @@ def stream_twitter(battle_id):
     stream = Stream(auth, listener)
 
     delay = battle.end_time - timezone.now()
-    print 'delay', delay, delay.total_seconds(), hashtag_values
     Timer(delay.total_seconds(), stream.disconnect).start()
 
     stream.filter(track=hashtag_values, languages = ['en'])

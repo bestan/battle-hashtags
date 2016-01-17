@@ -38,13 +38,13 @@ def api_detail(request, battle_id):
     data['name'] = battle.name
     data['start_time'] = battle.start_time
     data['end_time'] = battle.end_time
-    
+
     winner = battle.get_winner()
     data['winner'] = winner.hashtag.value if winner else None
 
     winner_by_ratio = battle.get_winner_by_ratio()
     data['winner_by_ratio'] = winner_by_ratio.hashtag.value if winner_by_ratio else None
 
-    data['hashtags'] = [x.hashtag.to_dict() for x in battle_hashtags]
+    data['hashtags'] = [x.to_dict() for x in battle_hashtags]
 
     return JsonResponse(data)

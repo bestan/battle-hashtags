@@ -67,8 +67,7 @@ class BattleHashtags(models.Model):
     words = models.IntegerField(default=0)
 
     def to_dict(self):
-        data = dict()
+        data = self.hashtag.to_dict()
         data['typos'] = self.typos
         data['words'] = self.words
-        data['hashtag'] = self.hashtag.to_dict()
         return data

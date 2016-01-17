@@ -23,6 +23,7 @@
 
   {% endif %}
 
+  <p><a href="{% url 'api_detail' battle.id %}">JSON response</a></p>
   <p><a href="{% url 'admin:battle_battle_change' battle.id %}">Edit battle</a></p>
 </body>
 </html>

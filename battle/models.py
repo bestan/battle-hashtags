@@ -27,6 +27,10 @@ class Hashtag(models.Model):
     def __str__(self):
         return "Hashtag: %s" % self.value
 
+    def to_dict(self):
+        data = dict(id=self.id, value=self.value)
+        return data
+
 class Battle(models.Model):
     name = models.CharField(max_length=32)
     hashtags = models.ManyToManyField(Hashtag, through='BattleHashtags')

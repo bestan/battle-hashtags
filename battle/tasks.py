@@ -34,7 +34,7 @@ class TwitterStreamListener(StreamListener):
 
     def on_error(self, status):
         if status == 420:
-            print 'Twitter has rate limitted this application. Please try again a little bit later.'
+            print 'Twitter has rate-limitted this application. Please try again a little bit later.'
         else:
             print 'Twitter error code', status
 
@@ -70,4 +70,4 @@ def stream_twitter(battle_id):
     delay = battle.end_time - timezone.now()
     Timer(delay.total_seconds(), stream.disconnect).start()
 
-    stream.filter(track=hashtag_values, languages = ['en'])
+    stream.filter(track=hashtag_values, languages=['en'])

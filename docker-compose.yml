@@ -18,7 +18,7 @@ worker:
   build: .
   command: su -m worker -c "python manage.py celery worker --loglevel=info"
   volumes:
-    - .:/app
+    - .:/code
   links:
     - db
     - broker

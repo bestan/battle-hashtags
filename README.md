@@ -49,10 +49,10 @@ JSON endpoint and the frontend shows both winners (according to the specificaion
 
 ###Future improvements
  - Implement tests.
- - Improve worker reliability (i.e. when broker restarts or shuts down during execution).
+ - Improve reliability of the worker (i.e. when the worker restarts or shuts down during execution).
  - Improve Twitter stream task termination.
- - Use celery with BROKER_USE_SSL with SSL certs.
- - Find a better dictionary for the spell checker. Currently it thinks that words `iPhone` and `http` all have typos.
- - Can't run multiple battle in parallel due to Twitter's rate limitting. One way of solving this is sharing one stream for all battles.
+ - Use celery with BROKER_USE_SSL and SSL certs.
+ - Find a better dictionary for the spell checker. Currently words like `iPhone` and `http` are considered to have typos.
+ - Can't run multiple battle in parallel due to Twitter's rate limitting. One way of solving this is sharing a single stream for all battles.
  - Handle a tie (i.e. when both hashtags have same number of typos and same ratios).
  - Set DEBUG to False (left it out to make errors observable).
